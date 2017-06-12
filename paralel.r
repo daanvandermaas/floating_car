@@ -20,6 +20,7 @@ clusterCall(cl, function() {
 
 
 shape = readRDS('db/shape.rds')
+#shape = readRDS('db\shape.rds')
 
 
 

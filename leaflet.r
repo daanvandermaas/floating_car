@@ -5,7 +5,7 @@ library(sf)
 library(leaflet)
 
 shape = readRDS('db/shape_wgs.rds')
-
+#shape = readRDS('db\shape_wgs.rds')
      
 for(i in 1:nrow(shape@data)){
 
