@@ -1,0 +1,8 @@
+library(parallel)
+library(rgdal)
+library(sp)
+library(tmap)
+library(sf)
+library(pbapply)
+library(rPython)
+library(leaflet)

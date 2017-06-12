@@ -1,12 +1,3 @@
-library(parallel)
-library(rgdal)
-library(sp)
-library(tmap)
-library(sf)
-library(pbapply)
-library(rPython)
-
-
 no_cores <- detectCores() - 1
 
 cl <- makeCluster(no_cores)

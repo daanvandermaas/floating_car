@@ -1,8 +1,4 @@
-library(rgdal)
-library(sp)
-library(tmap)
-library(sf)
-library(leaflet)
+
 
 shape = readRDS('db/shape_wgs.rds')
 #shape = readRDS('db\shape_wgs.rds')

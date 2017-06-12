@@ -1,7 +1,3 @@
-library(rgdal)
-library(sp)
-library(tmap)
-library(sf)
 
 shape = readOGR('db/bron/shape')
 #shape = readOGR('db\bron\shape')
