@@ -6,7 +6,7 @@ library(leaflet)
 
 shape = readRDS('db/shape_wgs.rds')
 
-
+     
 for(i in 1:nrow(shape@data)){
 
 coor = shape@lines[[i]][[1]]
