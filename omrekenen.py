@@ -1,4 +1,4 @@
-
+   
 class RDWGSConverter:
 
     X0      = 155000
