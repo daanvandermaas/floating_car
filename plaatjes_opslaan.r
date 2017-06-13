@@ -14,7 +14,24 @@ setwd('db/plaatjes_beoordeeld')
 #apply ipv for loop
 nummers = c(1:nrow(shape@data))
 
-pbsapply(nummers, function(i){
+
+no_cores <- detectCores() - 1
+cl <- makeCluster(no_cores)
+
+clusterCall(cl, function() { 
+  library(leaflet)
+  library(mapview)
+  
+})
+
+clusterExport(cl=cl, list("shape"),
+              envir=environment())
+
+
+
+
+
+parSapply(nummers, function(i){
 
   if(shape@data$goed[i] == 1 | shape@data$goed[i] == 2){
   
@@ -49,3 +66,4 @@ pbsapply(nummers, function(i){
   
 })
 setwd("/home/beheerder/R/floating_car")
+stopCluster(cl)

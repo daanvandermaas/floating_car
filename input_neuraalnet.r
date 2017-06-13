@@ -18,6 +18,17 @@ h= 100
 c=4
 shape = readRDS('db/shape_wgs.rds')
 
+##########maak cluster aan
+no_cores <- detectCores() - 1
+cl <- makeCluster(no_cores)
+
+clusterCall(cl, function() { 
+  library(feather)
+})
+
+clusterExport(cl=cl, list("shape"),
+              envir=environment())
+
 
 df = pbsapply( nummers, function(i){
 
@@ -78,7 +89,7 @@ df = pbsapply( nummers, function(i){
 
 
 
-df_labels = pbsapply(nummers, function(i){
+df_labels = parSapply(nummers, function(i){
 if(shape@data$goed[i] == 1){
   label = c(1,0)
 }else{
@@ -99,7 +110,7 @@ df= as.data.frame(t(df))
 
 
 
-
+stopCluster(cl)
 
 
 
