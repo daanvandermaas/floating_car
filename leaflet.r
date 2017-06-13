@@ -23,3 +23,5 @@ print(map)
 
 shape@data$goed[i] = readline(prompt="goed =1 fout = 2?: ")
 }
+
+saveRDS(shape, file = 'db/shape.rds')
