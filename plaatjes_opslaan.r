@@ -7,11 +7,13 @@ if(! dir.exists('db/plaatjes_beoordeeld')){
 shape = readRDS('db/shape_wgs.rds')
 #shape = readRDS('db\shape_wgs.rds')
 
-shape@data$goed = NA
+
 
 setwd('db/plaatjes_beoordeeld')
 
 for(i in 1:nrow(shape@data)){
+  
+  if(!is.na(shape@data$goed[i])){
   
   #lees de coordinaten en wissel ze om
   coor = shape@lines[[i]][[1]]
@@ -30,12 +32,8 @@ for(i in 1:nrow(shape@data)){
   
   
   
-  
-  #maak lijn en sla het op en beoordeel het
-  map =   addPolylines(map)
-  print(map)
-  shape@data$goed[i] = readline(prompt="goed =1 fout = 2?: ")
-  
+
+
   #maak alleen de lijn en sla het op
   map = leaflet(coor) 
   map = setView(map, zoom = 15, lat = x[1] , lng=y[1] )
@@ -44,7 +42,7 @@ for(i in 1:nrow(shape@data)){
   
   
   
-  
+  }
   
 }
 
