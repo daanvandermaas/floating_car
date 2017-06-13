@@ -1,6 +1,6 @@
 #lees filenames en bepaal het aantal
 files = list.files('db/plaatjes_beoordeeld')
-
+#unique pakken van de nummers
 nummers = sapply( strsplit(files, '[_.]') , function(x){
   as.numeric(x[2])
   
