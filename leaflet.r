@@ -9,8 +9,8 @@ for(i in 1:nrow(shape@data)){
 
 coor = shape@lines[[i]][[1]]
 
-x = coor[,1]
-y = coor[,2]
+x = coor[,1]+rnorm(1,0,0.0005)
+y = coor[,2]+rnorm(1,0,0.0005)
 coor[,1] = y
 coor[,2] = x
 
