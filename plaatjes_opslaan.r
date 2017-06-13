@@ -3,19 +3,33 @@ if(! dir.exists('db/plaatjes_beoordeeld')){
   dir.create('db/plaatjes_beoordeeld')
 }
 
+#lees filenames en bepaal het aantal
+files = list.files('db/plaatjes_beoordeeld')
+#unique pakken van de nummers
+nummers = unique(sapply( strsplit(files, '[_.]') , function(x){
+  as.numeric(x[2])
+  
+}))
+
+
 
 shape = readRDS('db/shape_wgs.rds')
-#shape = readRDS('db\shape_wgs.rds')
+
+
+
 
 
 
 setwd('db/plaatjes_beoordeeld')
 
-#apply ipv for loop
-nummers = c(1:nrow(shape@data))
+#welke nummers moeten we langs gaan?
+nummers = setdiff(c( which(shape@data$goed == 1), which(shape@data$goed == 2) ), nummers)
+
+
+
 
 ###########maak cluster aan
-no_cores <- detectCores() - 1
+no_cores <- detectCores() - 4
 cl <- makeCluster(no_cores)
 
 clusterCall(cl, function() { 
@@ -24,7 +38,7 @@ clusterCall(cl, function() {
   
 })
 
-clusterExport(cl=cl, list("shape"),
+clusterExport(cl=cl, list("shape", "nummers"),
               envir=environment())
 ##########
 
@@ -33,7 +47,6 @@ clusterExport(cl=cl, list("shape"),
 
 parSapply(cl,nummers, function(i){
 
-  if(shape@data$goed[i] == 1 | shape@data$goed[i] == 2){
   
   #lees de coordinaten en wissel ze om
   coor = shape@lines[[i]][[1]]
@@ -62,7 +75,6 @@ parSapply(cl,nummers, function(i){
   
   
   
-  }
   
 })
 setwd("/home/beheerder/R/floating_car")

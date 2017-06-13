@@ -136,4 +136,3 @@ write_feather(test_labels, path = 'db/neuraalnet/test_labels.fe')
 
 
 
-
