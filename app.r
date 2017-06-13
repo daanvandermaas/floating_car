@@ -9,6 +9,7 @@ source('leaflet.r')
 #sla de plaatjes op als een laag voor de achtergrond en eenn laag voor de lijn
 source('plaatjes_opslaan.r')
 #Maak een neuraalnetwerk input van de plaatjes (toekomstig)
+source('input_neuraalnet.r')
 #train neuraalnetwerk en sla het op (toekomstig)
 #laad neuraalnetwerk (toekomstig)
 

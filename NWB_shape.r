@@ -5,6 +5,10 @@ library(sf)
 
 shape <- readRDS('db/shape.rds')
 
+if(! dir.exists('db/wegvak_plaatjes')){
+  dir.create('db/wegvak_plaatjes')
+}
+
 
 
 proj4string(shape)
