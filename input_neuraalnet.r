@@ -24,13 +24,15 @@ cl <- makeCluster(no_cores)
 
 clusterCall(cl, function() { 
   library(feather)
+  library(EBImage)
 })
 
-clusterExport(cl=cl, list("shape"),
+clusterExport(cl=cl, list("shape", "w", "h", "c"),
               envir=environment())
 
+#######
 
-df = pbsapply( nummers, function(i){
+df = parSapply( cl, nummers, function(i){
 
   a = array(dim = c(w,h,c))
 
@@ -89,7 +91,7 @@ df = pbsapply( nummers, function(i){
 
 
 
-df_labels = parSapply(nummers, function(i){
+df_labels = parSapply(cl, nummers, function(i){
 if(shape@data$goed[i] == 1){
   label = c(1,0)
 }else{
