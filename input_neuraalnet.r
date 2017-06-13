@@ -13,8 +13,8 @@ if(! dir.exists('db/neuraalnet')){
 
 
 
-w = 200
-h= 200
+w = 100
+h= 100
 c=4
 df = data.frame()
 
