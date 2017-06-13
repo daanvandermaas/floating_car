@@ -77,5 +77,18 @@ parSapply(cl,nummers, function(i){
   
   
 })
+
+
+#verwijder eventuele html
+files = list.files()
+#unique pakken van de nummers
+nummers = sapply( strsplit(files, '[_.]') , function(x){
+  x[3] == 'html'
+})
+files = files[nummers]
+file.remove(files)
+
 setwd("/home/beheerder/R/floating_car")
+
+
 stopCluster(cl)
