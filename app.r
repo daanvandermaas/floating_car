@@ -14,4 +14,3 @@ source('input_neuraalnet.r')
 source('neuraalnet.r')
 #laad neuraalnetwerk (toekomstig)
 source('laadnet.r')
-
