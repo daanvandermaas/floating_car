@@ -12,8 +12,10 @@ shape = readRDS('db/shape_wgs.rds')
 setwd('db/plaatjes_beoordeeld')
 
 #apply ipv for loop
-for(i in 1:nrow(shape@data)){
-  #if 1 / 2
+nummers = c(1:nrow(shape@data))
+
+pbsapply(nummers, function(i){
+
   if(shape@data$goed[i] == 1 | shape@data$goed[i] == 2){
   
   #lees de coordinaten en wissel ze om
@@ -45,5 +47,5 @@ for(i in 1:nrow(shape@data)){
   
   }
   
-}
+})
 setwd("/home/beheerder/R/floating_car")
