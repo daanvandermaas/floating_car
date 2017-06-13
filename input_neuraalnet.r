@@ -1,10 +1,10 @@
 #lees filenames en bepaal het aantal
 files = list.files('db/plaatjes_beoordeeld')
 
-max = max(sapply( strsplit(files, '[_.]') , function(x){
+nummers = sapply( strsplit(files, '[_.]') , function(x){
   as.numeric(x[2])
   
-}))
+})
 
 #maak directory
 if(! dir.exists('db/neuraalnet')){
@@ -17,11 +17,12 @@ w = 100
 h= 100
 c=4
 df = data.frame()
+df_labels = data.frame()
+shape = readRDS('db/shape_wgs.rds')
 
 
+pbsapply( nummers, function(i){
 
-for(i in 1:max){
-  
   a = array(dim = c(w,h,c))
 
   
@@ -66,8 +67,31 @@ for(i in 1:max){
   
   extra = matrix(extra, nrow = 1)
   df = rbind(df, extra)
+  
+  if(shape@data$goed[i] == 1){
+    label = c(1,0)
+  }else{
+    label = c(0,1)
+  }
+  
+  df_labels = rbind(df_labels,label)
 
-}
+})
 
-write_feather(df, path = 'db/neuraalnet/train.rds')
+
+sample = sample(nrow(df), round(0.8*nrow(df)))
+
+train = df[sample,]
+test = df[-sample,]
+train_labels[sample,]
+test_labels[-sample,]
+
+
+write_feather(train, path = 'db/neuraalnet/train.rds')
+write_feather(test, path = 'db/neuraalnet/test.rds')
+write_feather(train_labels, path = 'db/neuraalnet/train_labels.rds')
+write_feather(test_labels, path = 'db/neuraalnet/test_labels.rds')
+
+
+
 
