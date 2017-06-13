@@ -13,5 +13,5 @@ source('input_neuraalnet.r')
 #train neuraalnetwerk en sla het op (toekomstig)
 source('neuraalnet.r')
 #laad neuraalnetwerk (toekomstig)
-
+source('laadnet.r')
 

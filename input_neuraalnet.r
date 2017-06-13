@@ -16,12 +16,10 @@ if(! dir.exists('db/neuraalnet')){
 w = 100
 h= 100
 c=4
-df = data.frame()
-df_labels = data.frame()
 shape = readRDS('db/shape_wgs.rds')
 
 
-pbsapply( nummers, function(i){
+df = pbsapply( nummers, function(i){
 
   a = array(dim = c(w,h,c))
 
@@ -66,25 +64,56 @@ pbsapply( nummers, function(i){
   extra<- scale( extra,center = mi , scale = ma-mi)
   
   extra = matrix(extra, nrow = 1)
-  df = rbind(df, extra)
+  return(extra)
   
-  if(shape@data$goed[i] == 1){
-    label = c(1,0)
-  }else{
-    label = c(0,1)
-  }
   
-  df_labels = rbind(df_labels,label)
+  
 
 })
+
+
+
+
+
+
+
+
+df_labels = pbsapply(nummers, function(i){
+if(shape@data$goed[i] == 1){
+  label = c(1,0)
+}else{
+  label = c(0,1)
+}
+
+return(label)
+})
+
+df_labels = as.data.frame(t(df_labels))
+df= as.data.frame(t(df))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 sample = sample(nrow(df), round(0.8*nrow(df)))
 
 train = df[sample,]
 test = df[-sample,]
-train_labels[sample,]
-test_labels[-sample,]
+train_labels = df_labels[sample,]
+test_labels = df_labels[-sample,]
 
 
 write_feather(train, path = 'db/neuraalnet/train.rds')
