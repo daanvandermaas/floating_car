@@ -6,18 +6,20 @@ minlat <- 50.72
 maxlat <- 53.47
 latinc <- 0.0171830629261852
 
+step=c(0.000898311,0.000930925)
 
 raster = data.frame( 'lat' = seq(minlat, maxlat, latinc) , 'freq' =  length(  seq(minlon, maxlon, loninc))  , stringsAsFactors = FALSE)
 raster =expandRows(raster,  'freq')
 raster$lon = seq(minlon, maxlon, loninc)
 
-
+raster_links <- raster-step
+raster_rechts <- raster+step
 
 
 
 map = leaflet() 
 map = addTiles(map)
 
-map =   addCircles(map, lat = raster$lat, lng = raster$lon)
-
+map =   addCircles(map, lat = raster_links$lat, lng = raster_links$lon)
+map =   addCircles(map, lat = raster_rechts$lat, lng = raster_rechts$lon)
 print(map)
