@@ -3,10 +3,10 @@ if(! dir.exists('db/neuraalnet/netwerk')){
   dir.create('db/neuraalnet/netwerk')
 }
 #lees train en test in
-train = read_feather('db/training/delen/deel0.fe')
-train_labels = read_feather('db/training/delen/train_labels.fe')
-test = read_feather('db/training/delen/test.fe')
-test_labels = read_feather('db/training/delen/test_labels.fe')
+train = read_feather('db/neuraalnet/train_1.fe')
+train_labels = read_feather('db/neuraalnet/train_labels_1.fe')
+test = read_feather('db/neuraalnet/test_1.fe')
+test_labels = read_feather('db/neuraalnet/test_labels_1.fe')
 
 #maak er matrices van
 

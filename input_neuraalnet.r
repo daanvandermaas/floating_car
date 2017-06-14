@@ -125,10 +125,10 @@ train_labels = df_labels[sample,]
 test_labels = df_labels[-sample,]
 
 
-write_feather(train, path = 'db/neuraalnet/train.fe')
-write_feather(test, path = 'db/neuraalnet/test.rds')
-write_feather(train_labels, path = 'db/neuraalnet/train_labels.fe')
-write_feather(test_labels, path = 'db/neuraalnet/test_labels.fe')
+write_feather(train, path = paste0('db/neuraalnet/train_', n, '.fe'))
+write_feather(test, path = paste0('db/neuraalnet/test_', n, '.fe'))
+write_feather(train_labels, path = paste0('db/neuraalnet/train_labels_', n, '.fe'))
+write_feather(test_labels, path = paste0('db/neuraalnet/test_labels_',n,'.fe'))
 
 
 

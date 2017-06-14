@@ -29,7 +29,7 @@ nummers = setdiff(c( which(shape@data$goed == 1), which(shape@data$goed == 2) ),
 
 
 ###########maak cluster aan
-no_cores <- detectCores() - 1
+no_cores <- detectCores() - 4
 cl <- makeCluster(no_cores)
 
 clusterCall(cl, function() { 
