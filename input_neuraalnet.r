@@ -1,10 +1,10 @@
 #lees filenames en bepaal het aantal
 files = list.files('db/plaatjes_beoordeeld')
 #unique pakken van de nummers
-nummers = sapply( strsplit(files, '[_.]') , function(x){
+nummers = unique(sapply( strsplit(files, '[_.]') , function(x){
   as.numeric(x[2])
   
-})
+}))
 
 #maak directory
 if(! dir.exists('db/neuraalnet')){
@@ -18,8 +18,21 @@ h= 100
 c=4
 shape = readRDS('db/shape_wgs.rds')
 
+##########maak cluster aan
+no_cores <- detectCores() - 1
+cl <- makeCluster(no_cores)
 
-df = pbsapply( nummers, function(i){
+clusterCall(cl, function() { 
+  library(feather)
+  library(EBImage)
+})
+
+clusterExport(cl=cl, list("shape", "w", "h", "c"),
+              envir=environment())
+
+#######
+
+df = parSapply( cl, nummers, function(i){
 
   a = array(dim = c(w,h,c))
 
@@ -78,7 +91,7 @@ df = pbsapply( nummers, function(i){
 
 
 
-df_labels = pbsapply(nummers, function(i){
+df_labels = parSapply(cl, nummers, function(i){
 if(shape@data$goed[i] == 1){
   label = c(1,0)
 }else{
@@ -99,7 +112,7 @@ df= as.data.frame(t(df))
 
 
 
-
+stopCluster(cl)
 
 
 
@@ -116,11 +129,10 @@ train_labels = df_labels[sample,]
 test_labels = df_labels[-sample,]
 
 
-write_feather(train, path = 'db/neuraalnet/train.rds')
+write_feather(train, path = 'db/neuraalnet/train.fe')
 write_feather(test, path = 'db/neuraalnet/test.rds')
-write_feather(train_labels, path = 'db/neuraalnet/train_labels.rds')
-write_feather(test_labels, path = 'db/neuraalnet/test_labels.rds')
-
+write_feather(train_labels, path = 'db/neuraalnet/train_labels.fe')
+write_feather(test_labels, path = 'db/neuraalnet/test_labels.fe')
 
 
 
