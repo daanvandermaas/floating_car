@@ -26,11 +26,7 @@ no_cores <- detectCores() - 1
 
 cl <- makeCluster(no_cores)
 
-clusterCall(cl, function() { 
-  library(rPython)
-  py = python.load("omrekenen.py")
-  
-})
+
 
 clusterExport(cl, c('shape', 'maxs', 'mins','coords'))
 #############
@@ -68,7 +64,7 @@ dev.off()
 
 })
 
-
+stopCluster(cl)
 
 
 
