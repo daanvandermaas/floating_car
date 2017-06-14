@@ -40,9 +40,9 @@ wegvakken = sapply(nummers, function(i){
 map = leaflet() 
 map = addTiles(map)
 
-for(i in 1:length(wegvakken)){
+sapply(c(1:length(wegvakken), function(i){
   map =   addPolylines(map, lat= wegvakken[[i]][,1] , lng = wegvakken[[i]][,2] )
-}
+})
 
 
 map = addCircleMarkers(map , lat= maxs$lat[N], lng = maxs$lon[N], color = 'red')

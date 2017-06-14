@@ -32,6 +32,13 @@ clusterExport(cl=cl, list("shape", "w", "h", "c"),
 
 #######
 
+
+
+nummers_list = split(as.data.table(nummers), 1:5)
+
+sapply(nummers_list, function(nummers){
+  nummers = nummers[[1]]
+
 df = parSapply( cl, nummers, function(i){
 
   a = array(dim = c(w,h,c))
@@ -107,7 +114,7 @@ df= as.data.frame(t(df))
 
 
 
-
+})
 
 
 
