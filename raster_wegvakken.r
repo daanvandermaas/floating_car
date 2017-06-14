@@ -32,7 +32,7 @@ clusterCall(cl, function() {
   
 })
 
-clusterExport(cl, c('shape', 'maxs', 'mins'))
+clusterExport(cl, c('shape', 'maxs', 'mins','coords'))
 #############
 
 parSapply(cl, c(1:nrow(coords)), function(N){
