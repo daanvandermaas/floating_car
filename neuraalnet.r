@@ -159,7 +159,7 @@ for (i in 1:200000) {
   #train
   
   #valideer om de 100 keer hoe het gaat
-  if (i %% 100 == 0) {
+  if (i %% 10 == 0) {
     #evalueel accuraatheid
     train_accuracy <- accuracy$eval(feed_dict = dict(      x = train  , y_ = train_labels, keep_prob = 1.0))
     #print acuraatheid
