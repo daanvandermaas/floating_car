@@ -23,7 +23,7 @@ clas = as.integer(ncol(train_labels))
 
 
 hoogte = as.integer(100)
-kanalen = as.integer(3)
+kanalen = as.integer(4)
 
 #place holders
 
