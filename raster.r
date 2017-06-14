@@ -4,9 +4,9 @@ loninc <- 0.0176875784440828
 
 minlat <- 50.72
 maxlat <- 53.47
-latinc <- 0.0171830629261852
+latinc <- 0.0176830629261852
 
-step=c(0.000898311,0.000930925)
+step=c(latinc/2+0.000898311,loninc/2+0.000930925)
 
 raster = data.frame( 'lat' = seq(minlat, maxlat, latinc) , 'freq' =  length(  seq(minlon, maxlon, loninc))  , stringsAsFactors = FALSE)
 raster =expandRows(raster,  'freq')
