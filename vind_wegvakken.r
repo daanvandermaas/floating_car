@@ -72,6 +72,7 @@ wegvakken = sapply(nummers, function(i){
 
 map = leaflet() 
 map = addTiles(map)
+
 for(i in 1:length(wegvakken)){
 map =   addPolylines(map, lat= wegvakken[[i]][,1] , lng = wegvakken[[i]][,2] )
 }
