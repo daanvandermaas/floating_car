@@ -18,10 +18,10 @@ raster_rechts <- raster+step
 
 
 
-map = leaflet() 
-map = addTiles(map)
+#map = leaflet() 
+#map = addTiles(map)
 
-map =   addCircles(map, lat = raster$lat, lng = raster$lon)
-map =   addCircles(map, lat = raster_links$lat, lng = raster_links$lon, color="red")
-map =   addCircles(map, lat = raster_rechts$lat, lng = raster_rechts$lon, color="yellow")
-print(map)
+#map =   addCircles(map, lat = raster$lat, lng = raster$lon)
+#map =   addCircles(map, lat = raster_links$lat, lng = raster_links$lon, color="red")
+#map =   addCircles(map, lat = raster_rechts$lat, lng = raster_rechts$lon, color="yellow")
+#print(map)

@@ -91,6 +91,9 @@ nummers = sapply( strsplit(files, '[_.]') , function(x){
 files = files[nummers]
 file.remove(files)
 
+
+
+
 setwd("/home/beheerder/R/floating_car")
 
 

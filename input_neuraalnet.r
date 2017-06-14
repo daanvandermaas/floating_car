@@ -1,3 +1,6 @@
+
+
+
 #lees filenames en bepaal het aantal
 files = list.files('db/plaatjes_beoordeeld')
 #unique pakken van de nummers
@@ -36,8 +39,8 @@ clusterExport(cl=cl, list("shape", "w", "h", "c"),
 
 nummers_list = split(as.data.table(nummers), 1:5)
 
-sapply(nummers_list, function(nummers){
-  nummers = nummers[[1]]
+sapply(c(1:length(nummers_list)), function(n){
+  nummers = nummers_list[[n]][[1]]
 
 df = parSapply( cl, nummers, function(i){
 
@@ -47,6 +50,7 @@ df = parSapply( cl, nummers, function(i){
   
   
   #lees fotos in
+  print(i)
   im_kaart = readImage(  paste0('db/plaatjes_beoordeeld/kaart_', i, '.png') )
   im_lijn = readImage(  paste0('db/plaatjes_beoordeeld/lijn_', i, '.png') )
   
@@ -113,6 +117,20 @@ df= as.data.frame(t(df))
 
 
 
+sample = sample(nrow(df), round(0.8*nrow(df)))
+
+train = df[sample,]
+test = df[-sample,]
+train_labels = df_labels[sample,]
+test_labels = df_labels[-sample,]
+
+
+write_feather(train, path = 'db/neuraalnet/train.fe')
+write_feather(test, path = 'db/neuraalnet/test.rds')
+write_feather(train_labels, path = 'db/neuraalnet/train_labels.fe')
+write_feather(test_labels, path = 'db/neuraalnet/test_labels.fe')
+
+
 
 })
 
@@ -128,18 +146,6 @@ stopCluster(cl)
 
 
 
-sample = sample(nrow(df), round(0.8*nrow(df)))
-
-train = df[sample,]
-test = df[-sample,]
-train_labels = df_labels[sample,]
-test_labels = df_labels[-sample,]
-
-
-write_feather(train, path = 'db/neuraalnet/train.fe')
-write_feather(test, path = 'db/neuraalnet/test.rds')
-write_feather(train_labels, path = 'db/neuraalnet/train_labels.fe')
-write_feather(test_labels, path = 'db/neuraalnet/test_labels.fe')
 
 
 
