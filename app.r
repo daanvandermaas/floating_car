@@ -25,3 +25,4 @@ source('laadnet.r')
 #rasterverdeling
 #source rasterverdeling
 #source vind wegvakken
+source('vind_wegvakken.r')
