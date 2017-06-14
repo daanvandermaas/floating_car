@@ -4,6 +4,10 @@ source('packages.r')
 source('lees_shape.r')
 #reken de coordinaten om naar wsg en sla op als shape_wgs.rds
 source('omrekenen_shape.r')
+
+
+
+#per wegvak id
 #teken op de kaart en label de plaatjes
 source('leaflet.r')
 #sla de plaatjes op als een laag voor de achtergrond en eenn laag voor de lijn
@@ -14,3 +18,10 @@ source('input_neuraalnet.r')
 source('neuraalnet.r')
 #laad neuraalnetwerk (toekomstig)
 source('laadnet.r')
+
+
+
+
+#rasterverdeling
+#source rasterverdeling
+#source vind wegvakken

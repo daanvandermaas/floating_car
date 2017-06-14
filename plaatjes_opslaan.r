@@ -47,6 +47,8 @@ clusterExport(cl=cl, list("shape", "nummers"),
 
 parSapply(cl,nummers, function(i){
 
+
+
   
   #lees de coordinaten en wissel ze om
   coor = shape@lines[[i]][[1]]
@@ -76,7 +78,8 @@ parSapply(cl,nummers, function(i){
   
   
   
-})
+}
+)
 
 
 #verwijder eventuele html
