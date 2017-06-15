@@ -7,3 +7,10 @@ for(i in 1:nrow(train)){
   browser()
   
 }
+
+
+
+sess$run(y_conv, feed_dict = dict(x = train, keep_prob = 1))
+
+sess$run(correct_prediction, feed_dict = dict(x = train, keep_prob = 1, y_ = train_labels))
+

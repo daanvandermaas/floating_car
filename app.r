@@ -26,4 +26,4 @@ source('laadnet.r')
 #source rasterverdeling
 source('raster.r')
 #source vind wegvakken
-source('vind_wegvakken.r')
+source('raster_wegvakken.r')

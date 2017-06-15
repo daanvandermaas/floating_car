@@ -16,7 +16,7 @@ test = as.matrix(test)
 test_labels = as.matrix(test_labels)
 
 
-max_accuracy = 0
+max_accuracy = 1
 
 clas = as.integer(ncol(train_labels))
 
@@ -69,7 +69,7 @@ max_pool_2x2 <- function(x) {
 # eerste convolutie laag
 
 #maak gewichten en biasses
-W_conv1 <- weight_variable(shape(5L, 5L, kanalen, 40L), 'W_conv1')
+W_conv1 <- weight_variable(shape(10L, 10L, kanalen, 40L), 'W_conv1')
 b_conv1 <- bias_variable(shape(40L), 'b_conv1')
 
 #maak van de input een tensor van batchx hoogte x breedte x kanalen
@@ -159,7 +159,7 @@ for (i in 1:200000) {
   #train
   
   #valideer om de 100 keer hoe het gaat
-  if (i %% 10 == 0) {
+  if (i %% 100 == 0) {
     #evalueel accuraatheid
     train_accuracy <- accuracy$eval(feed_dict = dict(      x = train  , y_ = train_labels, keep_prob = 1.0))
     #print acuraatheid
@@ -202,7 +202,7 @@ for (i in 1:200000) {
   }
   
   
-  train_step$run(feed_dict = dict(x = train[samp,] , y_ = train_labels[samp,], keep_prob = 0.2, lrate = 1e-4))
+  train_step$run(feed_dict = dict(x = train[samp,] , y_ = train_labels[samp,], keep_prob = 1, lrate = 1e-4))
   
   
   
