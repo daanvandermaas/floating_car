@@ -42,7 +42,30 @@ shape@lines =  parLapply(cl, coordinates(shape), function(x){
 
 stopCluster(cl)
 
-shape@data <- shape@data[order(shape@data$WVK_ID, -shape@data$WVK_BEGDAT), ] #sort by id and reverse of date
+
+
+shape = readRDS('db/shape_wgs.rds')
+
+
+
+shape@data$id = c(1:nrow(shape@data))
+shape@data$WVK_BEGDAT = as.character(shape@data$WVK_BEGDAT)
+shape@data$WVK_BEGDAT  = as.POSIXct(shape@data$WVK_BEGDAT, format = '%Y/%m/%d')
+shape@data$WVK_ID = as.character(shape@data$WVK_ID)
+
+
+
+shape@data <- arrange(shape@data,desc(WVK_ID), desc(WVK_BEGDAT))
+
+
+
+
 shape@data <- shape@data[!duplicated(shape@data$WVK_ID),]
+
+  
+shape@lines =   lapply( shape@data$id , function(i){
+    return(shape@lines[[i]])
+  })
+  
 
 saveRDS(shape, file = 'db/shape_wgs.rds')
